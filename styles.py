@@ -1,8 +1,14 @@
 """Styling constants for the digital twin Gradio app."""
 
+DESCRIPTION = (
+    "Talk to my AI twin about my career.\n\n"
+    "*AI-generated answers based on my background; may contain errors. "
+    "For anything specific, [reach me directly](https://www.linkedin.com/in/siva-tech-leader).*"
+)
+
 EXAMPLES = [
     "Tell me about your background and experience.",
-    "What kinds of projects are you working on now?",
+    "What is your experience with Oracle EBS and OCI?",
     "What are your strongest technical skills?",
     "How can I get in touch with you?",
 ]

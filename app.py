@@ -3,7 +3,7 @@ import spaces
 from openai import OpenAI
 from context import TWIN_SYSTEM_PROMPT
 from tools import tools, handle_tool_calls
-from styles import CSS, JS, EXAMPLES
+from styles import CSS, JS, EXAMPLES, DESCRIPTION
 from dotenv import load_dotenv
 import gradio as gr
 
@@ -20,7 +20,7 @@ groq_url = "https://api.groq.com/openai/v1"
 
 groq = OpenAI(api_key=groq_api_key, base_url=groq_url)
 
-MODEL_NAME = "openai/gpt-oss-20b"
+MODEL_NAME = "openai/gpt-oss-120b"
 
 system = [{"role": "system", "content": TWIN_SYSTEM_PROMPT}]
 
@@ -56,6 +56,6 @@ if __name__ == "__main__":
         chat,
         examples=EXAMPLES,
         title="Digital Twin",
-        description="Talk to my AI twin about my career",
+        description=DESCRIPTION,
         chatbot=gr.Chatbot(show_label=False),
     ).launch(css=CSS, js=JS, theme=gr.themes.Base())

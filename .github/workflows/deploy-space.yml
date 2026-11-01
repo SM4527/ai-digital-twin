@@ -1,0 +1,31 @@
+name: Deploy to Hugging Face Space
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-space
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+
+      - name: Upload to Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: >
+          uvx --from huggingface_hub==2.4.0 hf upload SM4527/ai-digital-twin . . --repo-type=space
+          --exclude ".git/*" --exclude ".github/*" --exclude ".vscode/*" --exclude ".gitignore"
+          --commit-message "Deploy ${GITHUB_SHA::7} from GitHub"
